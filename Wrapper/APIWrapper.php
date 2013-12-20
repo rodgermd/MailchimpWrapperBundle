@@ -63,6 +63,19 @@ class APIWrapper
     }
 
     /**
+     * Subscribe email
+     *
+     * @param string $email
+     * @param string $listId
+     *
+     * @return EmailStructure
+     */
+    public function subscribeEmail($email, $listId = null)
+    {
+        return $this->subscribe(new SubscribeModel($email), $listId);
+    }
+
+    /**
      * Gets list subscribers
      *
      * @param \Rodgermd\MailchimpWrapperBundle\Model\Base\ListMemberOptions $options
