@@ -27,7 +27,7 @@ class SubscribeModel
     /** @var bool */
     public $doubleOptin = true;
     /** @var bool */
-    public $updateExisting = false;
+    public $updateExisting = true;
     /** @var bool */
     public $replaceInterests = true;
     /** @var bool */
