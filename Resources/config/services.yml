@@ -4,3 +4,4 @@ parameters:
 services:
   rodgermd.mailchimp:
     class: %rodgermd.mailchimp.wrapper_class%
+    arguments: [%rodgermd.mailchimp.api_key%, %rodgermd.mailchimp.default_list_id%]

@@ -15,12 +15,23 @@ use Symfony\Component\Config\FileLocator;
  */
 class RodgermdMailchimpWrapperExtension extends Extension
 {
-  public function load(array $configs, ContainerBuilder $container)
-  {
-    $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+    /**
+     * Load configuration
+     *
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-    foreach (array('services') as $basename) {
-      $loader->load(sprintf('%s.yml', $basename));
+        foreach (array('services') as $basename) {
+            $loader->load(sprintf('%s.yml', $basename));
+        }
+
+        $config = $configs[0];
+        foreach ($config as $key => $value) {
+            $container->setParameter('rodgermd.mailchimp.' . $key, $value);
+        }
     }
-  }
 }
