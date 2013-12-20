@@ -1,0 +1,6 @@
+parameters:
+  rodgermd.mailchimp.wrapper_class: "Rodgermd\MailchimpWrapperBundle\Wrapper\APIWrapper"
+
+services:
+  rodgermd.mailchimp:
+    class: %rodgermd.mailchimp.wrapper_class%

@@ -1,8 +1,10 @@
+<?php
 namespace Rodgermd\MailchimpWrapperBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class RodgermdMailchimpWrapperBundle extends Bundle
 {
 }
+
+?>
