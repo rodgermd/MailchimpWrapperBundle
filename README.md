@@ -16,7 +16,9 @@ AppKernel.php:
 new Rodgermd\MailchimpWrapperBundle\RodgermdMailchimpWrapperBundle(),
 ~~~
 
+
 2. Configure
+------------
 
 Required options:
 
