@@ -1,0 +1,22 @@
+{
+  "name":"rodgermd/mailchimp2-wrapper-bundle",
+  "description":"Mailchimp API 2.0 wrapper. Not a public!",
+  "homepage":"https://github.com/rodgermd/MailchimpWrapperBundle",
+  "type":"symfony-bundle",
+  "license":"MIT",
+  "authors":[
+    {
+      "name":"Alexander Murashov",
+      "email":"rodger@ladela.com"
+    }
+  ],
+  "require": {
+    "mailchimp/mailchimp": "@stable"
+  },
+  "autoload":{
+    "psr-0":{
+      "Rodgermd\\MailchimpWrapperBundle":""
+    }
+  },
+  "target-dir":"Rodgermd/MailchimpWrapperBundle"
+}
