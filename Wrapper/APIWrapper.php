@@ -102,20 +102,22 @@ class APIWrapper
     /**
      * Creates campaign
      *
-     * @param $name
-     * @param $content
+     * @param string $subject
+     * @param string $content
+     * @param string $title - optional
      *
      * @return array
      *
      * @throws \Rodgermd\MailchimpWrapperBundle\Exception\MailchimpAPIException
      */
-    public function createCampaign($name, $content)
+    public function createCampaign($subject, $content, $title = null)
     {
         try {
             return $this->api->campaigns->create(
                 'regular',
                 array(
-                    'subject'       => $name,
+                    'title'         => $title ? : $subject,
+                    'subject'       => $subject,
                     'list_id'       => $this->defaultListId,
                     'from_email'    => $this->defaultFromEmail['email'],
                     'from_name'     => $this->defaultFromEmail['name'],
