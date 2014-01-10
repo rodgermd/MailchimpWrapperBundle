@@ -9,6 +9,7 @@
 namespace Rodgermd\MailchimpWrapperBundle\Wrapper;
 
 use \Mailchimp;
+use Rodgermd\MailchimpWrapperBundle\Exception\MailchimpAPIException;
 use Rodgermd\MailchimpWrapperBundle\Model\Base\EmailStructure;
 use Rodgermd\MailchimpWrapperBundle\Model\Base\ListMemberOptions;
 use Rodgermd\MailchimpWrapperBundle\Model\SubscribeModel;
@@ -25,17 +26,21 @@ class APIWrapper
     protected $api;
     /** @var string */
     protected $defaultListId;
+    /** @var string */
+    protected $defaultFromEmail;
 
     /**
      * Object constructor
      *
      * @param string $apiKey
      * @param string $defaultListId
+     * @param string $defaultFromEmail
      */
-    public function __construct($apiKey, $defaultListId)
+    public function __construct($apiKey, $defaultListId, $defaultFromEmail)
     {
-        $this->api           = new Mailchimp($apiKey);
-        $this->defaultListId = $defaultListId;
+        $this->api              = new Mailchimp($apiKey);
+        $this->defaultListId    = $defaultListId;
+        $this->defaultFromEmail = $defaultFromEmail;
     }
 
     /**
@@ -78,8 +83,8 @@ class APIWrapper
     /**
      * Gets list subscribers
      *
-     * @param \Rodgermd\MailchimpWrapperBundle\Model\Base\ListMemberOptions $options
-     * @param string                                                        $listId
+     * @param ListMemberOptions $options
+     * @param string            $listId
      *
      * @return array
      */
@@ -92,5 +97,34 @@ class APIWrapper
         }
 
         return $subscribers;
+    }
+
+    /**
+     * Creates campaign
+     *
+     * @param $name
+     * @param $content
+     *
+     * @return array
+     *
+     * @throws \Rodgermd\MailchimpWrapperBundle\Exception\MailchimpAPIException
+     */
+    public function createCampaign($name, $content)
+    {
+        try {
+            return $this->api->campaigns->create(
+                'regular',
+                array(
+                    'subject'       => $name,
+                    'list_id'       => $this->defaultListId,
+                    'from_email'    => $this->defaultFromEmail['email'],
+                    'from_name'     => $this->defaultFromEmail['name'],
+                    'generate_text' => true
+                ),
+                array('html' => $content)
+            );
+        } catch (\Mailchimp_Error $e) {
+            throw new MailchimpAPIException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 } 
